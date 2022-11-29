@@ -1,15 +1,17 @@
-const express = require ("express")
+const express = require("express");
 const BodyParser = require("body-parser");
 const isCelebrateError = require("celebrate").isCelebrateError;
 const userRouter = require("./routes/user_route");
 const candidateRouter = require("./routes/candidate");
 const companyRouter = require("./routes/company");
+const contactRouter = require("./routes/contact");
 const app = express();
 app.use(express.json());
 app.use(BodyParser.json());
 app.use("/api/user", userRouter);
 app.use("/api/new", candidateRouter);
 app.use("/api/new", companyRouter);
+app.use("/api/new", contactRouter);
 // Route middlewares
 app.use((err, req, res, next) => {
   if (isCelebrateError(err)) {

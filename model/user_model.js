@@ -1,30 +1,36 @@
 const express = require("express");
-const Joi = require('joi');
-const mongoose = require('mongoose');
+const Joi = require("joi");
+const mongoose = require("mongoose");
 
 // This is a user modal / user schema
 
-const User = mongoose.model('User', new mongoose.Schema({
+const User = mongoose.model(
+  "User",
+  new mongoose.Schema({
     name: {
-        type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 50
+      type: String,
+      required: true,
+      minlength: 5,
+      maxlength: 50,
     },
     email: {
-        type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 255,
-        unique: true
+      type: String,
+      required: true,
+      minlength: 5,
+      maxlength: 255,
+      unique: true,
     },
     password: {
-        type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 1024
-    }
-}));
+      type: String,
+      required: true,
+      minlength: 5,
+      maxlength: 1024,
+    },
+    company: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Company",
+    },
+  })
+);
 
 exports.User = User;
-
