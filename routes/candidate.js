@@ -41,4 +41,15 @@ candidateRoute.post(
   }
 );
 
+/// GET Request
+candidateRoute.get("/candidate", async (req, res) => {
+  // Check if this user already exisits
+  let candidate = await Candidate.findOne({ email: req.body.email });
+  if (candidate) {
+    return res.send(candidate);
+  } else {
+    return res.status(400).send(errors);
+  }
+});
+
 module.exports = candidateRoute;

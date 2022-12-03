@@ -34,7 +34,10 @@ const Contact = mongoose.model(
       maxlength: 255,
     },
     // one to one relationship
-    company_id: { type: mongoose.Schema.Types.ObjectId, ref: "Company" },
+    company: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Company",
+    },
   })
 );
 

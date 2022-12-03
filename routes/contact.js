@@ -13,7 +13,7 @@ contactRoute.post(
         email: Joi.string().email().lowercase().required(),
         phone: Joi.string().min(10).max(100000).required(),
         status: Joi.string().min(5).max(20).required(),
-        company_id: Joi.string().required(),
+        company: Joi.string().required(),
       }),
     },
     { abortEarly: false }
@@ -31,12 +31,29 @@ contactRoute.post(
         email: req.body.email,
         phone: req.body.phone,
         status: req.body.status,
-        company_id: req.body.company_id,
+        company: req.body.company,
       });
       await contact.save();
       res.send(contact);
     }
   }
 );
+
+/// GET Request
+contactRoute.get("/contact", async (req, res) => {
+  // Check if this user already exisits
+  let contact = await Contact.findOne({ email: req.body.email }).populate({
+    path: "company",
+    populate: {
+      path: "users",
+      // model: "Component",
+    },
+  });
+  if (contact) {
+    return res.send(contact);
+  } else {
+    return res.status(400).send(errors);
+  }
+});
 
 module.exports = contactRoute;

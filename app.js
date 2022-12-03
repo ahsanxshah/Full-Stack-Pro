@@ -5,13 +5,15 @@ const userRouter = require("./routes/user_route");
 const candidateRouter = require("./routes/candidate");
 const companyRouter = require("./routes/company");
 const contactRouter = require("./routes/contact");
+const job_orderRouter = require("./routes/job_order");
 const app = express();
 app.use(express.json());
 app.use(BodyParser.json());
 app.use("/api/user", userRouter);
-app.use("/api/new", candidateRouter);
-app.use("/api/new", companyRouter);
-app.use("/api/new", contactRouter);
+app.use("/api", candidateRouter);
+app.use("/api", companyRouter);
+app.use("/api", contactRouter);
+app.use("/api", job_orderRouter);
 // Route middlewares
 app.use((err, req, res, next) => {
   if (isCelebrateError(err)) {

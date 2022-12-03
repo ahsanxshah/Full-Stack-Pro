@@ -15,13 +15,6 @@ const Company = mongoose.model(
       maxlength: 50,
       unique: true,
     },
-    // one to one relationship
-    // contact: {
-    //   type: String,
-    //   required: true,
-    //   minlength: 5,
-    //   maxlength: 20,
-    // },
     status: {
       type: String,
       required: true,
@@ -52,6 +45,12 @@ const Company = mongoose.model(
         ref: "User",
       },
     ],
+    // contacts: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Contact",
+    //   },
+    // ],
   })
 );
 
